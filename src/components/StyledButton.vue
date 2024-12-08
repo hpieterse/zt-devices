@@ -15,7 +15,7 @@ const classes = {
 <template>
   <button
     :disabled="disabled"
-    :class="`px-6 py-3 rounded-md font-semibold ${classes[color ?? 'primary']}`"
+    :class="`px-6 py-3 rounded-2xl font-semibold ${classes[color ?? 'primary']}`"
   >
     <slot></slot>
   </button>

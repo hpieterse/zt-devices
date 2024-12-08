@@ -21,8 +21,8 @@ const reload = () => {
     <PageHeading>Your devices</PageHeading>
   </div>
   <StyledButton @click="reload" :disabled="loading" class="mb-5">
-    <template v-if="loading"> Loading... </template>
-    <template v-else> Reload </template>
+    <template v-if="loading"> Refreshing... </template>
+    <template v-else> Refresh </template>
   </StyledButton>
 
   <div class="flex flex-col">

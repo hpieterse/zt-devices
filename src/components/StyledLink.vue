@@ -12,7 +12,7 @@ const props = defineProps({
   <RouterLink
     v-bind="$attrs"
     :to="props.to"
-    class="inline-block px-6 py-3 rounded-md font-semibold bg-secondary-default hover:bg-secondary-dark active:bg-secondary-darkest disabled:bg-secondary-default disabled:opacity-50 text-white"
+    class="inline-block px-6 py-3 rounded-2xl font-semibold bg-secondary-default hover:bg-secondary-dark active:bg-secondary-darkest disabled:bg-secondary-default disabled:opacity-50 text-white"
     ><slot></slot
   ></RouterLink>
 </template>
