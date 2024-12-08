@@ -20,11 +20,29 @@ watchEffect(() => {
 </script>
 
 <template>
-  <header class="bg-green-600 py-6 text-center font-bold text-white mb-6 flex px-6">
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
+  <header class="h-24 flex flex-col items-center justify-center">
+    <picture>
+      <!-- User prefers light mode: -->
+      <source
+        srcset="@/assets/logo.png, @/assets/logo@2x.png 2x, @/assets/logo@3x.png 3x"
+        media="(prefers-color-scheme: light)"
+      />
 
-    <h1 class="mx-4 flex-1 text-left text-2xl">Task App</h1>
-    <button class="self-end" v-if="isLoggedIn" @click="logout">Logout</button>
+      <!-- User prefers dark mode: -->
+      <source
+        srcset="
+          @/assets/logo-white.png,
+          @/assets/logo-white@2x.png 2x,
+          @/assets/logo-white@3x.png 3x
+        "
+        media="(prefers-color-scheme: dark)"
+      />
+
+      <!-- User has no color preference: -->
+      <img srcset="@/assets/logo.png, @/assets/logo@2x.png 2x, @/assets/logo@3x.png 3x" />
+    </picture>
+
+    <button v-if="isLoggedIn" @click="logout">Logout</button>
   </header>
 
   <main class="max-w-4xl mx-auto px-6">
