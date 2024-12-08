@@ -11,7 +11,7 @@ export default {
           default: '#F87171',
         },
         success: {
-          default: '#34D399',
+          default: '#10B981',
         },
         dark: {
           default: '#1A1A1A',

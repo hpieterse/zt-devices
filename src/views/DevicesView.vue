@@ -4,6 +4,8 @@ import KeyValueList from '@/components/KeyValueList.vue'
 import PageHeading from '@/components/PageHeading.vue'
 import StyledButton from '@/components/StyledButton.vue'
 import StyledLink from '@/components/StyledLink.vue'
+import { formatTime } from '@/formatters/format-time'
+import { formatVersion } from '@/formatters/format-version'
 import { useDeviceStore } from '@/stores/device-store'
 import { computed } from 'vue'
 
@@ -40,11 +42,11 @@ const reload = () => {
         </KeyValue>
         <KeyValue class="hidden xs:block">
           <template v-slot:key>Last seen on a network</template>
-          <template v-slot:value> {{ device.lastSeen }} </template>
+          <template v-slot:value> {{ formatTime(device.lastSeen) }} </template>
         </KeyValue>
         <KeyValue class="hidden xs:block">
           <template v-slot:key>Version</template>
-          <template v-slot:value> {{ device.clientVersion }} </template>
+          <template v-slot:value> {{ formatVersion(device.clientVersion) }} </template>
         </KeyValue>
         <KeyValue class="hidden md:block">
           <template v-slot:key>Names</template>

@@ -4,6 +4,10 @@ import StyledButton from '@/components/StyledButton.vue'
 import KeyValueList from '@/components/KeyValueList.vue'
 import KeyValue from '@/components/KeyValue.vue'
 import { ref } from 'vue'
+import { formatTime } from '@/formatters/format-time'
+import { formatVersion } from '@/formatters/format-version'
+import ValuePill from '@/components/ValuePill.vue'
+
 const { network } = defineProps<{
   network: DeviceNetwork
 }>()
@@ -34,13 +38,15 @@ const toggle = () => {
       <KeyValue class="hidden sm:block" v-if="!isExpanded">
         <template v-slot:key>Last seen</template>
         <template v-slot:value>
-          {{ network.membershipDetail.lastSeen }}
+          {{ formatTime(network.membershipDetail.lastSeen) }}
         </template>
       </KeyValue>
       <KeyValue class="hidden md:block" v-if="!isExpanded">
-        <template v-slot:key>Authorised</template>
+        <template v-slot:key><span class="invisible">Authorized</span></template>
         <template v-slot:value>
-          {{ network.membershipDetail.config?.authorized ? 'Authorised' : 'Not authorized' }}
+          <ValuePill :color="network.membershipDetail.config?.authorized ? 'success' : 'error'">{{
+            network.membershipDetail.config?.authorized ? 'Authorised' : 'Not authorized'
+          }}</ValuePill>
         </template>
       </KeyValue>
       <KeyValue class="hidden lg:block" v-if="!isExpanded">
@@ -74,7 +80,9 @@ const toggle = () => {
       <KeyValue>
         <template v-slot:key>Name</template>
         <template v-slot:value
-          ><span class="break-words">{{ network.config?.name }}</span></template
+          ><span class="break-words" v-if="network.config?.name">{{
+            network.config?.name
+          }}</span></template
         >
         <template v-slot:explanation>
           A user-defined short name for this network that is visible to members. We recommend using
@@ -89,10 +97,19 @@ const toggle = () => {
       <KeyValue>
         <template v-slot:key>Last seen</template>
         <template v-slot:value>
-          {{ network.membershipDetail.lastSeen }}
+          {{ formatTime(network.membershipDetail.lastSeen) }}
         </template>
         <template v-slot:explanation>
           The last time this member checked in with the network controller for this network.
+        </template>
+      </KeyValue>
+      <KeyValue>
+        <template v-slot:key>Version</template>
+        <template v-slot:value>
+          {{ formatVersion(network.membershipDetail.clientVersion) }}
+        </template>
+        <template v-slot:explanation>
+          Version of the ZeroTier agent running on the device
         </template>
       </KeyValue>
       <KeyValue>

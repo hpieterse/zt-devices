@@ -7,6 +7,8 @@ import PageHeading from '@/components/PageHeading.vue'
 import KeyValueList from '@/components/KeyValueList.vue'
 import KeyValue from '@/components/KeyValue.vue'
 import NetworkDetail from './NetworkDetail.vue'
+import { formatTime } from '@/formatters/format-time'
+import { formatVersion } from '@/formatters/format-version'
 
 const { id } = defineProps<{
   id: string
@@ -34,9 +36,17 @@ const device = computed(() => deviceStore.getDevice(id))
 
         <KeyValue>
           <template v-slot:key>Last seen on a network</template>
-          <template v-slot:value>{{ device.value.lastSeen }}</template>
+          <template v-slot:value>{{ formatTime(device.value.lastSeen) }}</template>
           <template v-slot:explanation>
             Last contact to one of the networks the device is a member of
+          </template>
+        </KeyValue>
+
+        <KeyValue>
+          <template v-slot:key>Version</template>
+          <template v-slot:value>{{ formatVersion(device.value.clientVersion) }}</template>
+          <template v-slot:explanation>
+            Most recent reported version of the ZeroTier agent running on the device
           </template>
         </KeyValue>
         <KeyValue>

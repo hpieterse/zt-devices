@@ -18,6 +18,7 @@
     "update-api-types": "openapi-typescript https://docs.zerotier.com/redocusaurus/plugin-redoc-0.yaml -o ./functions/models/zerotier/schema.d.ts"
   },
   "dependencies": {
+    "luxon": "3.5.0",
     "openapi-fetch": "0.13.3",
     "pinia": "2.3.0",
     "vue": "3.5.13",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "4.20241205.0",
     "@tsconfig/node22": "22.0.0",
+    "@types/luxon": "3.4.2",
     "@types/node": "22.10.1",
     "@vitejs/plugin-vue": "5.2.1",
     "@vue/eslint-config-prettier": "10.1.0",
