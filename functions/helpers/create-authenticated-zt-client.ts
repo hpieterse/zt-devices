@@ -11,7 +11,7 @@ const authMiddleware = (
   },
 })
 
-export const createZtClient = (
+export const createAuthenticatedZtClient = (
   env: Env,
   request: Request<unknown, IncomingRequestCfProperties<unknown>>,
 ) => {

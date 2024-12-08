@@ -28,10 +28,10 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue'),
+      component: () => import('@/views/LoginView.vue'),
       beforeEnter: [unauthenticatedGuard],
     },
-    { path: '/:catchAll(.*)', component: () => import('../views/NotFoundView.vue') },
+    { path: '/:catchAll(.*)', component: () => import('@/views/NotFoundView.vue') },
   ],
 })
 

@@ -2,6 +2,8 @@
 import { defineProps } from 'vue'
 import { RouterLink } from 'vue-router'
 
+// TODO: The styled button uses very similar styles. Find a way to share the styles or build one component that
+// support buttons and anchors
 const props = defineProps({
   // @ts-expect-error Recommended by vue-router (https://router.vuejs.org/guide/advanced/extending-router-link)
   ...RouterLink.props,

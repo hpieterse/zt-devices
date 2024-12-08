@@ -16,6 +16,9 @@ export const onRequestOptions: PagesFunction<Env> = async ({ env }) => {
 const authentication: PagesFunction<Env> = ({ next, request }) => {
   const allowedPaths = ['/api/login']
   const requestUrl = new URL(request.url)
+
+  // options request don't require authentication
+  // only authenticate api routes
   const requestAllowed =
     request.method === 'OPTIONS' ||
     !requestUrl.pathname.includes('/api/') ||
@@ -25,6 +28,7 @@ const authentication: PagesFunction<Env> = ({ next, request }) => {
     return next()
   }
 
+  // Assume that the user is logged in if the Authorization header is present
   const authHeader = request.headers.get('Authorization')
   if (!authHeader) {
     return new Response('Unauthorized', {

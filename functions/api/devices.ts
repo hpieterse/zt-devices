@@ -1,20 +1,20 @@
 import { Env } from '../environment'
-import { createZtClient } from '../helpers/create-zt-client'
+import { createAuthenticatedZtClient } from '../helpers/create-authenticated-zt-client'
 import { aggregateDeviceMetadata } from '../helpers/aggregate-device-metadata'
 import { Device } from '../models/device'
 import { DeviceNetwork } from '../models/device-network'
 
 export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
-  const client = createZtClient(env, request)
+  const client = createAuthenticatedZtClient(env, request)
 
   const {
     data: networks,
-    error: networkError,
-    response: networkResponse,
+    error: networkGetError,
+    response: networkGetResponse,
   } = await client.GET('/network')
 
-  if (networkError) {
-    return new Response(networkResponse.statusText, { status: networkResponse.status })
+  if (networkGetError) {
+    return new Response(networkGetResponse.statusText, { status: networkGetResponse.status })
   }
 
   // get all devices for all networks
@@ -39,6 +39,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
     .filter(({ error }) => error)
     .map(({ response }) => response)
   if (failedResponses.length > 0) {
+    // choose the first failed response to return
     return new Response(failedResponses[0].statusText, { status: failedResponses[0].status })
   }
 
@@ -48,12 +49,13 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
     .reduce((devicesMap, member) => {
       const deviceNetwork: DeviceNetwork = {
         ...member.network,
-        // make sure the if is not null
+        // make sure the id is not null
         id: member.network.id ?? '',
         // add the original member details to the network
         membershipDetail: member,
       }
 
+      // aggregate the new device into the existing device aggregate
       devicesMap.set(member.nodeId, {
         id: member.nodeId,
         ...aggregateDeviceMetadata(deviceNetwork, member, devicesMap.get(member.nodeId)),

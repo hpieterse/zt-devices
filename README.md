@@ -32,6 +32,10 @@ The app's error handling is rather limited, where errors are handled in a generi
 
 - I could be more selective in the data being returned from the API. Only returning data that is needed by the front end. In this case, the API is only intended to be used by this specific frontend, so it can be optimised.
 
+### Localization
+
+It is a good idea to think about localization and translations from the start. In my experience the cost of adding it later is much higher that doing it from the start.
+
 ### UI Improvements
 
 Here are some small changes to the UI that I would suggest:
@@ -41,6 +45,7 @@ Here are some small changes to the UI that I would suggest:
 - I think it would be cool if filtering, searching and sorting could be added to the lists/tabular data.
 - Additional data can be displayed on the device detail page. It should be trivial to add more fields (both to the aggregation and the network details view)
 - Generally, the layout could be tweaked a lot, especially in regards to optimizing the layout for different screen sizes.
+- The login form uses default HTML validation, this could be better. I could also validate the token if it the expected format (length, used character etc.)
 
 ## Scripts
 
