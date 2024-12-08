@@ -1,6 +1,8 @@
 import { Env } from '../environment'
 import { createZtClient } from '../helpers/create-zt-client'
-import { Device, ztDeviceToDevice } from '../models/device'
+import { mergeDevicesMetadata } from '../helpers/merge-device-metadata'
+import { ztDeviceToDevice } from '../helpers/zt-device-to-device'
+import { Device } from '../models/device'
 
 export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
   const client = createZtClient(env, request)
@@ -41,21 +43,20 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
   const devices = devicesWithNetworkResponses
     .flatMap(({ mapped }) => mapped)
     .reduce((devicesMap, member) => {
-      if (devicesMap.has(member.nodeId)) {
-        const existingMember = devicesMap.get(member.nodeId)
-        devicesMap.set(member.nodeId, {
-          ...existingMember,
-          lastSeen: Math.max(existingMember.lastSeen, member.lastSeen),
-          networks: [
-            ...existingMember.networks,
-            { ...member.network, id: member.network.id ?? '' },
-          ],
+      const mappedDevice = {
+        ...ztDeviceToDevice(member),
+        networks: [{ ...member.network, id: member.network.id ?? '' }],
+      }
+
+      if (devicesMap.has(mappedDevice.id)) {
+        const existingDevice = devicesMap.get(member.nodeId)
+
+        devicesMap.set(mappedDevice.id, {
+          id: mappedDevice.id,
+          ...mergeDevicesMetadata(existingDevice, mappedDevice),
         })
       } else {
-        devicesMap.set(member.nodeId, {
-          ...ztDeviceToDevice(member),
-          networks: [{ ...member.network, id: member.network.id ?? '' }],
-        })
+        devicesMap.set(member.nodeId, mappedDevice)
       }
 
       return devicesMap

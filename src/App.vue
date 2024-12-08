@@ -48,7 +48,7 @@ watchEffect(() => {
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-6">
+  <main class="max-w-screen-xl mx-auto px-6">
     <RouterView />
   </main>
 </template>
