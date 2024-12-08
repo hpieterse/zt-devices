@@ -49,7 +49,7 @@ const reload = () => {
           <template v-slot:value> {{ formatVersion(device.clientVersion) }} </template>
         </KeyValue>
         <KeyValue class="hidden md:block">
-          <template v-slot:key>Names</template>
+          <template v-slot:key>Device Names</template>
           <template v-slot:value>
             <ul v-if="device.names.length > 0">
               <li v-for="name in device.names" :key="name">{{ name }}</li>

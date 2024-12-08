@@ -73,7 +73,7 @@ const toggle = () => {
   <div
     :id="`network-details-${network.id}`"
     :aria-labelledby="`network-label-${network.id}`"
-    class="py-4"
+    class="py-4 max-w-xl"
     :class="{ hidden: !isExpanded, block: isExpanded }"
   >
     <KeyValueList class="flex flex-col gap-5">
@@ -103,6 +103,16 @@ const toggle = () => {
           The last time this member checked in with the network controller for this network.
         </template>
       </KeyValue>
+      <KeyValue>
+        <template v-slot:key>Device name</template>
+        <template v-slot:value>
+          {{ network.membershipDetail.name }}
+        </template>
+        <template v-slot:explanation>
+          A user-defined short name for the device within this network.
+        </template>
+      </KeyValue>
+
       <KeyValue>
         <template v-slot:key>Version</template>
         <template v-slot:value>
