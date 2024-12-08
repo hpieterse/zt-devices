@@ -14,7 +14,12 @@
     "type-check-web": "vue-tsc --build",
     "type-check-api": "vue-tsc --noEmit -p ./functions/tsconfig.json",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/",
+    "format": "run-p format-web format-api",
+    "format-check": "run-p format-check-web format-check-api",
+    "format-web": "prettier --write src/",
+    "format-check-web": "prettier --check src/",
+    "format-api": "prettier --write functions/",
+    "format-check-api": "prettier --check functions/",
     "update-api-types": "openapi-typescript https://docs.zerotier.com/redocusaurus/plugin-redoc-0.yaml -o ./functions/models/zerotier/schema.d.ts"
   },
   "dependencies": {
