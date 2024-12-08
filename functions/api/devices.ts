@@ -46,12 +46,15 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
         devicesMap.set(member.nodeId, {
           ...existingMember,
           lastSeen: Math.max(existingMember.lastSeen, member.lastSeen),
-          networks: [...existingMember.networks, member.network],
+          networks: [
+            ...existingMember.networks,
+            { ...member.network, id: member.network.id ?? '' },
+          ],
         })
       } else {
         devicesMap.set(member.nodeId, {
           ...ztDeviceToDevice(member),
-          networks: [member.network],
+          networks: [{ ...member.network, id: member.network.id ?? '' }],
         })
       }
 
