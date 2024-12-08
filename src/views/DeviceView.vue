@@ -3,6 +3,10 @@ import { useDeviceStore } from '@/stores/device-store'
 import { computed, defineProps } from 'vue'
 import NotFoundView from './NotFoundView.vue'
 import StyledLink from '@/components/StyledLink.vue'
+import PageHeading from '@/components/PageHeading.vue'
+import KeyValueList from '@/components/KeyValueList.vue'
+import KeyValue from '@/components/KeyValue.vue'
+import NetworkDetail from '@/components/NetworkDetail.vue'
 
 const { id } = defineProps<{
   id: string
@@ -15,15 +19,36 @@ const device = computed(() => deviceStore.getDevice(id))
 
 <template>
   <template v-if="device.value != null">
-    <div class="mb-4">
-      <StyledLink to="..">Back</StyledLink>
+    <PageHeading>Device details</PageHeading>
+    <StyledLink to=".." class="mb-5">Back</StyledLink>
+
+    <div class="py-4">
+      <KeyValueList class="flex flex-col gap-5">
+        <KeyValue>
+          <template v-slot:key>Device Address</template>
+          <template v-slot:value>{{ device.value.id }}</template>
+          <template v-slot:explanation>
+            A ZeroTier Node's Address. This is the node's unique ZerTier ID.
+          </template>
+        </KeyValue>
+        <KeyValue>
+          <template v-slot:key>Last seen on a network</template>
+          <template v-slot:value>{{ device.value.lastSeen }}</template>
+          <template v-slot:explanation>
+            Last contact to one of the networks the device is a member of
+          </template>
+        </KeyValue>
+      </KeyValueList>
     </div>
 
-    <div class="p-4 border gap-2 flex flex-col">
-      <h1 class="text-xl">Device details</h1>
-      <h1 class="text-lg">{{ device.value.id }}</h1>
-      <div v-for="network in device.value.networks" :key="network.id ?? 0">
-        {{ network.id }}
+    <div class="flex flex-col">
+      <h2 class="text-2xl font-thin">Network membership</h2>
+      <div
+        v-for="network in device.value.networks"
+        :key="network.id"
+        class="flex p-4 flex-col border-b border-secondary-30 first:border-t"
+      >
+        <NetworkDetail :network="network" />
       </div>
     </div>
   </template>

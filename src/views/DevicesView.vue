@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import KeyValue from '@/components/KeyValue.vue'
 import KeyValueList from '@/components/KeyValueList.vue'
+import PageHeading from '@/components/PageHeading.vue'
 import StyledButton from '@/components/StyledButton.vue'
 import StyledLink from '@/components/StyledLink.vue'
 import { useDeviceStore } from '@/stores/device-store'
@@ -17,18 +18,17 @@ const reload = () => {
 
 <template>
   <div>
-    <h1 class="text-4xl font-thin mb-10">Your devices</h1>
+    <PageHeading>Your devices</PageHeading>
   </div>
-  <StyledButton @click="reload" :disabled="loading">
+  <StyledButton @click="reload" :disabled="loading" class="mb-5">
     <template v-if="loading"> Loading... </template>
     <template v-else> Reload </template>
   </StyledButton>
 
-  <div class="mt-5 flex flex-col">
+  <div class="flex flex-col">
     <div
       v-for="device in devices"
       :key="device.id"
-      :device="device"
       class="flex gap-5 p-4 items-start border-b border-secondary-30 first:border-t"
     >
       <KeyValueList class="flex-1 grid grid-cols-1 xs:grid-cols-2">

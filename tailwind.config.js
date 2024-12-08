@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xs': '480px',
+        'xs': '580px',
       },
       colors: {
         error: {
