@@ -16,7 +16,10 @@ onMounted(() => {
       <slot name="key"></slot>
     </dt>
     <dd class="row-start-2 empty:after:content-['-']"><slot name="value"></slot></dd>
-    <dd v-if="$slots.explanation" class="col-start-2 row-span-2 text-sm font-light text-dark-50">
+    <dd
+      v-if="$slots.explanation"
+      class="col-start-2 row-span-2 text-sm font-light text-dark-50 hidden xs:block"
+    >
       <slot name="explanation"></slot>
     </dd>
   </div>

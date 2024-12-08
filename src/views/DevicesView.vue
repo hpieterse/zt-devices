@@ -49,13 +49,13 @@ const reload = () => {
         <KeyValue class="hidden md:block">
           <template v-slot:key>Names</template>
           <template v-slot:value>
-            <ul>
+            <ul v-if="device.names.length > 0">
               <li v-for="name in device.names" :key="name">{{ name }}</li>
             </ul>
           </template>
         </KeyValue>
         <KeyValue class="hidden lg:block">
-          <template v-slot:key>Physical Address</template>
+          <template v-slot:key>Physical IP</template>
           <template v-slot:value> {{ device.physicalAddress }} </template>
         </KeyValue>
       </KeyValueList>

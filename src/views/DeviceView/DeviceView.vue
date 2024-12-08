@@ -23,7 +23,7 @@ const device = computed(() => deviceStore.getDevice(id))
     <StyledLink to=".." class="mb-5">Back</StyledLink>
 
     <div class="py-4">
-      <KeyValueList class="flex flex-col gap-5">
+      <KeyValueList class="flex flex-col gap-5 max-w-xl">
         <KeyValue>
           <template v-slot:key>Device Address</template>
           <template v-slot:value>{{ device.value.id }}</template>
@@ -31,11 +31,20 @@ const device = computed(() => deviceStore.getDevice(id))
             A ZeroTier Node's Address. This is the node's unique ZerTier ID.
           </template>
         </KeyValue>
+
         <KeyValue>
           <template v-slot:key>Last seen on a network</template>
           <template v-slot:value>{{ device.value.lastSeen }}</template>
           <template v-slot:explanation>
             Last contact to one of the networks the device is a member of
+          </template>
+        </KeyValue>
+        <KeyValue>
+          <template v-slot:key>Physical IP</template>
+          <template v-slot:value>{{ device.value.physicalAddress }}</template>
+          <template v-slot:explanation>
+            The physical IP address the member is connecting to the controller. It is Probably the
+            IP address of your internet router/modem.
           </template>
         </KeyValue>
       </KeyValueList>

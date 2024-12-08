@@ -1,8 +1,8 @@
 import { Env } from '../environment'
 import { createZtClient } from '../helpers/create-zt-client'
-import { mergeDevicesMetadata } from '../helpers/merge-device-metadata'
-import { ztDeviceToDevice } from '../helpers/zt-device-to-device'
+import { aggregateDeviceMetadata } from '../helpers/aggregate-device-metadata'
 import { Device } from '../models/device'
+import { DeviceNetwork } from '../models/device-network'
 
 export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
   const client = createZtClient(env, request)
@@ -17,7 +17,8 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
     return new Response(networkResponse.statusText, { status: networkResponse.status })
   }
 
-  const devicesWithNetworkResponses = await Promise.all(
+  // get all devices for all networks
+  const networkMembers = await Promise.all(
     networks.map(async (network) => {
       const memberResponse = await client.GET('/network/{networkID}/member', {
         params: {
@@ -25,6 +26,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
         },
       })
 
+      // add the network to each member so that we can add the list of networks to the final list of devices
       return {
         mapped: [...memberResponse.data.map((member) => ({ ...member, network }))],
         ...memberResponse,
@@ -33,31 +35,29 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
   )
 
   // check that all requests were successful
-  const failedResponses = devicesWithNetworkResponses
+  const failedResponses = networkMembers
     .filter(({ error }) => error)
     .map(({ response }) => response)
   if (failedResponses.length > 0) {
     return new Response(failedResponses[0].statusText, { status: failedResponses[0].status })
   }
 
-  const devices = devicesWithNetworkResponses
+  const devices = networkMembers
     .flatMap(({ mapped }) => mapped)
+    // get a unique list of devices, aggregating the meta data
     .reduce((devicesMap, member) => {
-      const mappedDevice = {
-        ...ztDeviceToDevice(member),
-        networks: [{ ...member.network, id: member.network.id ?? '' }],
+      const deviceNetwork: DeviceNetwork = {
+        ...member.network,
+        // make sure the if is not null
+        id: member.network.id ?? '',
+        // add the original member details to the network
+        membershipDetail: member,
       }
 
-      if (devicesMap.has(mappedDevice.id)) {
-        const existingDevice = devicesMap.get(member.nodeId)
-
-        devicesMap.set(mappedDevice.id, {
-          id: mappedDevice.id,
-          ...mergeDevicesMetadata(existingDevice, mappedDevice),
-        })
-      } else {
-        devicesMap.set(member.nodeId, mappedDevice)
-      }
+      devicesMap.set(member.nodeId, {
+        id: member.nodeId,
+        ...aggregateDeviceMetadata(deviceNetwork, member, devicesMap.get(member.nodeId)),
+      })
 
       return devicesMap
     }, new Map<string, Device>())

@@ -1,10 +1,10 @@
-import type { Network } from './network'
+import type { DeviceNetwork } from './device-network'
 
 export type Device = {
   id: string
-  lastSeen: number
+  lastSeen: number | null
   clientVersion: string
   names: string[]
   physicalAddress: string
-  networks: Network[]
+  networks: DeviceNetwork[]
 }
