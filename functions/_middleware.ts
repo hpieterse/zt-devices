@@ -15,7 +15,7 @@ export const onRequestOptions: PagesFunction<Env> = async ({ env }) => {
 // check for authenticated routes
 const authentication: PagesFunction<Env> = ({ next, request }) => {
   const allowedPaths = ['/api/login']
-  const requestUrl = URL.parse(request.url)
+  const requestUrl = new URL(request.url)
   const requestAllowed = request.method === 'OPTIONS' || allowedPaths.includes(requestUrl.pathname)
 
   if (requestAllowed) {
