@@ -64,5 +64,6 @@ const reload = () => {
 
       <StyledLink :to="device.id">Detail</StyledLink>
     </div>
+    <p v-if="devices.length === 0">You don't have any devices yet.</p>
   </div>
 </template>
