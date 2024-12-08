@@ -57,6 +57,7 @@ The following scripts are provided in the `package.json` file:
 - `npm run format`: Run prettier to format code
 - `npm run format-check`: Check if all your files are formatted correctly
 - `npm run preview`: Run the production build locally. You have to run `npm run build` first.
+- `update-api-types`: Update the typescript types for the ZeroTier API.
 
 Some of these scripts are also available for the frontend or backend separately.
 
