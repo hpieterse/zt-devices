@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        'xs': '480px',
+      },
       colors: {
         error: {
           default: '#F87171',

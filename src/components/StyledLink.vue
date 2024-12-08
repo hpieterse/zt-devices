@@ -9,7 +9,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <RouterLink v-bind="$attrs" :to="props.to" class="text-green-500 hover:text-green-600"
+  <RouterLink
+    v-bind="$attrs"
+    :to="props.to"
+    class="inline-block px-6 py-3 rounded-md font-semibold bg-secondary-default hover:bg-secondary-dark active:bg-secondary-darkest disabled:bg-secondary-default disabled:opacity-50 text-white"
     ><slot></slot
   ></RouterLink>
 </template>
