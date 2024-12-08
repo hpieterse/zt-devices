@@ -16,7 +16,10 @@ export const onRequestOptions: PagesFunction<Env> = async ({ env }) => {
 const authentication: PagesFunction<Env> = ({ next, request }) => {
   const allowedPaths = ['/api/login']
   const requestUrl = new URL(request.url)
-  const requestAllowed = request.method === 'OPTIONS' || allowedPaths.includes(requestUrl.pathname)
+  const requestAllowed =
+    request.method === 'OPTIONS' ||
+    !requestUrl.pathname.includes('/api/') ||
+    allowedPaths.includes(requestUrl.pathname)
 
   if (requestAllowed) {
     return next()
@@ -39,21 +42,3 @@ const addHeader: PagesFunction<Env> = async ({ env, next }) => {
 }
 
 export const onRequest = [authentication, addHeader]
-
-// export const onRequest: PagesFunction<Env> = async ({ env, next, request }) => {
-//   if (request.method !== 'OPTIONS') {
-//     const authHeader = request.headers.get('Authorization')
-//     if (!authHeader) {
-//       return new Response('Unauthorized', {
-//         status: 401,
-//         headers: {
-//           'Access-Control-Allow-Origin': env.ACCESS_CONTROL_ALLOW_ORIGIN ?? null,
-//         },
-//       })
-//     }
-//   }
-
-//   const response = await next()
-//   response.headers.set('Access-Control-Allow-Origin', env.ACCESS_CONTROL_ALLOW_ORIGIN ?? null)
-//   return response
-// }
