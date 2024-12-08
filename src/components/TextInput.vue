@@ -22,6 +22,6 @@ const value = defineModel()
     type="text"
     :placeholder="placeholder"
     :required="required"
-    class="border border-dark-default py-4 px-6 rounded-md dark:text-black placeholder:text-dark-80"
+    class="border border-dark-default py-4 px-6 rounded-md text-black placeholder:text-dark-80"
   />
 </template>

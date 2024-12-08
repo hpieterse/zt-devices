@@ -7,7 +7,7 @@ const { color, disabled } = defineProps<{
 
 const classes = {
   primary:
-    'bg-primary-default hover:bg-primary-dark active:bg-primary-darkest disabled:bg-primary-default disabled:opacity-50',
+    'bg-primary-default hover:bg-primary-dark active:bg-primary-darkest disabled:bg-primary-default disabled:opacity-50 text-black',
   secondary:
     'bg-secondary-default hover:bg-secondary-dark active:bg-secondary-darkest disabled:bg-secondary-default disabled:opacity-50',
 }
