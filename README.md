@@ -1,6 +1,8 @@
 # zt-devices
 
-This template for a Vue SPA with a cloudflare worker backend.
+This site lists all your ZeroTier devices and details about their memberships to your different networks.
+
+The site is hosted on Cloudflare here: [https://zt-devices.pages.dev/](https://zt-devices.pages.dev/)
 
 ## Scripts
 
@@ -10,9 +12,10 @@ The following scripts are provided in the `package.json` file:
 - `npm run build`: The build command used for production builds
 - `npm run lint`: Run lint checks
 - `npm run format`: Run prettier to format code
+- `npm run format-check`: Check if all your files are formatted correctly
 - `npm run preview`: Run the production build locally. You have to run `npm run build` first.
-- `npm run dev-api`: Start the backend server only
-- `npm run dev-web`: Star the Vue dev server only
+
+some of these scripts are also available for the frontend or backend separately.
 
 ## Local development setup
 
