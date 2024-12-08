@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import StyledLink from '@/components/StyledLink.vue'
 import { useDeviceStore } from '@/stores/device-store'
 import { computed } from 'vue'
 
@@ -23,6 +24,8 @@ const reload = () => {
   <div class="mt-4 flex flex-col gap-6">
     <div v-for="device in devices" :key="device.id" :device="device">
       {{ device.id }}
+      {{ device.lastSeen }}
+      <StyledLink :to="device.id">Detail</StyledLink>
     </div>
   </div>
 </template>
