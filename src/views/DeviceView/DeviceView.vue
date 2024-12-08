@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useDeviceStore } from '@/stores/device-store'
 import { computed, defineProps } from 'vue'
-import NotFoundView from './NotFoundView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 import StyledLink from '@/components/StyledLink.vue'
 import PageHeading from '@/components/PageHeading.vue'
 import KeyValueList from '@/components/KeyValueList.vue'
 import KeyValue from '@/components/KeyValue.vue'
-import NetworkDetail from '@/components/NetworkDetail.vue'
+import NetworkDetail from './NetworkDetail.vue'
 
 const { id } = defineProps<{
   id: string

@@ -14,12 +14,12 @@ const router = createRouter({
         {
           path: '/',
           name: 'devices',
-          component: () => import('../views/DevicesView.vue'),
+          component: () => import('@/views/DevicesView.vue'),
         },
         {
           path: '/:id',
           name: 'taskDetail',
-          component: () => import('../views/DeviceView.vue'),
+          component: () => import('@/views/DeviceView'),
           props: true,
         },
       ],
