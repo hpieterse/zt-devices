@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { useTaskStore } from '@/stores/task-store'
+import { useDeviceStore } from '@/stores/device-store'
 import { computed } from 'vue'
 
 // initialize the store
-const taskStore = useTaskStore()
-taskStore.dispatchInitialize()
+const deviceStore = useDeviceStore()
+deviceStore.dispatchInitialize()
 
-const storeError = computed(() => taskStore.failed)
-const storeInitializing = computed(() => !taskStore.initialized)
+const storeError = computed(() => deviceStore.failed)
+const storeInitializing = computed(() => !deviceStore.initialized)
 </script>
 
 <template>

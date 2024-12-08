@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { useTaskStore } from '@/stores/task-store'
-import TaskCard from '@/components/TaskCard.vue'
+import { useDeviceStore } from '@/stores/device-store'
 import { computed } from 'vue'
 
-const taskStore = useTaskStore()
-const tasks = computed(() => taskStore.tasks)
-const loading = computed(() => taskStore.loading)
+const deviceStore = useDeviceStore()
+const devices = computed(() => deviceStore.devices)
+const loading = computed(() => deviceStore.loading)
 
 const reload = () => {
-  taskStore.dispatchLoad()
+  deviceStore.dispatchLoad()
 }
 </script>
 
@@ -22,6 +21,8 @@ const reload = () => {
     <template v-else> Reload </template>
   </button>
   <div class="mt-4 flex flex-col gap-6">
-    <TaskCard v-for="task in tasks" :key="task.id" :task="task" />
+    <div v-for="device in devices" :key="device.id" :device="device">
+      {{ device.id }}
+    </div>
   </div>
 </template>

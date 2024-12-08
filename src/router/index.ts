@@ -13,13 +13,13 @@ const router = createRouter({
       children: [
         {
           path: '/',
-          name: 'tasks',
-          component: () => import('../views/TasksView.vue'),
+          name: 'devices',
+          component: () => import('../views/DevicesView.vue'),
         },
         {
           path: '/:id',
           name: 'taskDetail',
-          component: () => import('../views/TaskView.vue'),
+          component: () => import('../views/DeviceView.vue'),
           props: true,
         },
       ],
