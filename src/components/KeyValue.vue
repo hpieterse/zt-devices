@@ -11,7 +11,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="grid grid-cols-2 grid-rows-[auto_1fr] gap-x-5">
+  <div class="grid xs:grid-cols-2 grid-rows-[auto_1fr] grid-cols-1 gap-x-5">
     <dt class="col-start-1 text-sm font-light text-secondary-darkest dark:text-secondary-30">
       <slot name="key"></slot>
     </dt>
