@@ -1,0 +1,46 @@
+{
+  "name": "zt-devices",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev-web\" \"npm run dev-api\"",
+    "dev-web": "vite",
+    "dev-api": "wrangler pages dev ./functions --port 8788",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "pinia": "2.3.0",
+    "vue": "3.5.13",
+    "vue-router": "4.5.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20241205.0",
+    "@tsconfig/node22": "22.0.0",
+    "@types/node": "22.10.1",
+    "@vitejs/plugin-vue": "5.2.1",
+    "@vue/eslint-config-prettier": "10.1.0",
+    "@vue/eslint-config-typescript": "14.1.4",
+    "@vue/tsconfig": "0.7.0",
+    "autoprefixer": "10.4.20",
+    "concurrently": "9.1.0",
+    "eslint": "9.16.0",
+    "eslint-plugin-vue": "9.32.0",
+    "npm-run-all2": "7.0.1",
+    "postcss": "8.4.49",
+    "prettier": "3.4.2",
+    "sass": "1.82.0",
+    "sass-loader": "16.0.4",
+    "tailwindcss": "3.4.16",
+    "typescript": "5.6.3",
+    "vite": "6.0.3",
+    "vite-plugin-vue-devtools": "7.6.7",
+    "vue-tsc": "2.1.10",
+    "wrangler": "3.93.0"
+  }
+}
