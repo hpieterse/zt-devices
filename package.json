@@ -10,7 +10,9 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build",
+    "type-check": "run-p type-check-web type-check-api",
+    "type-check-web": "vue-tsc --build",
+    "type-check-api": "vue-tsc --noEmit -p ./functions/tsconfig.json",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "update-api-types": "openapi-typescript https://docs.zerotier.com/redocusaurus/plugin-redoc-0.yaml -o ./functions/models/zerotier/schema.d.ts"
