@@ -11,7 +11,8 @@ const { color, disabled } = defineProps<{
     class="px-6 py-3 rounded-2xl font-semibold"
     :class="{
       'bg-primary-default hover:bg-primary-dark active:bg-primary-darkest disabled:bg-primary-default disabled:opacity-50 text-black':
-        color === 'primary',
+        // default style is primary
+        color === 'primary' || !color,
       'bg-secondary-default hover:bg-secondary-dark active:bg-secondary-darkest disabled:bg-secondary-default disabled:opacity-50 text-white':
         color === 'secondary',
     }"
