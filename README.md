@@ -43,6 +43,7 @@ Here are some small changes to the UI that I would suggest:
 - Some of my initial UI ideas changed while I was implementing the UI, and the result is that the tabular data is a bit non-standard where the label for each field is repeated. Some of the UI should be reconsidered and if it is appropriate use more traditional data tables.
 - Usability could be improved with icons on the buttons
 - I think it would be cool if filtering, searching and sorting could be added to the lists/tabular data.
+- I have not considered the hidden property of devices. This should maybe also be hidden (or should be behind a filter)
 - Additional data can be displayed on the device detail page. It should be trivial to add more fields (both to the aggregation and the network details view)
 - Generally, the layout could be tweaked a lot, especially in regards to optimizing the layout for different screen sizes.
 - The login form uses default HTML validation, this could be better. I could also validate the token if it the expected format (length, used character etc.)
