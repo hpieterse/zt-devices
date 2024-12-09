@@ -62,20 +62,30 @@ The following scripts are provided in the `package.json` file:
 
 Some of these scripts are also available for the frontend or backend separately.
 
-## Local development setup
+## Getting started
 
 The local development setup runs the frontend Vue dev server and a backend server for Cloudflare workers.
 
 - The frontend uses the Vite dev server included by default with Vue projects
 - The backend workers are run using [wrangler](https://developers.cloudflare.com/workers/wrangler/).
 
-### Calling the backend from the frontend
+Here are the steps to get started:
 
-In production, the backend APIs are hosted on the same origin in Cloudflare. Therefore, the APIs can be called using a relative URL.
+First run nom install to install all dependencies:
 
-In development, the backend and front end are hosted on two different ports. The script in the `package.json` sets the port
-that the backend is run on to `8788`. This is also defined as an environment variable in `.env.development`. If you want to change the
-backend port, you have to edit both the `package.json` and the `.env.development` files.
+```bash
+npm install
+```
 
-Additionally, because the backend and frontend are hosted on different origins, you have to set the `CORS` headers in the backend. This is done using middleware in setting an `Access-Control-Allow-Origin` header. The value used for the header is defined in `.dev.vars`. In production, the value is not set, therefore, the value used in production
-for `Access-Control-Allow-Origin` is `null`
+Then start the local dev server to run the frontend and backend:
+
+```bash
+npm run dev
+```
+
+### Configuring backend server port
+
+In the current config, the backend server will run on port `8788`. If this is not available, you change the port in two places:
+
+1. In the package.json the `dev-api` script defines the port the backend is run on
+2. In the vite.config, the dev server proxy setup also defines the port
