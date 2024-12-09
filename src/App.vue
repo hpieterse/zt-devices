@@ -40,7 +40,10 @@ watchEffect(() => {
       />
 
       <!-- User has no color preference: -->
-      <img srcset="@/assets/logo.png, @/assets/logo@2x.png 2x, @/assets/logo@3x.png 3x" />
+      <img
+        srcset="@/assets/logo.png, @/assets/logo@2x.png 2x, @/assets/logo@3x.png 3x"
+        alt="ZeroTier logo"
+      />
     </picture>
 
     <div class="col-start-3 flex justify-end items-center">
